@@ -1,0 +1,322 @@
+swagger: '2.0'
+info:
+  title: Google Place
+  description: ''
+  version: '1.0'
+tags:
+  - name: GooglePlace
+host: amer-partner52-prod.apigee.net
+basePath: '/googleplace'
+schemes:
+  - https
+paths:
+  '/textsearch/{resourceType}':
+    get:
+      parameters:
+        - description: json/xml
+          name: resourceType
+          required: true
+          in: path
+          type: string
+        - description: 'The text string on which to search,for Eg:restaurant'
+          name: query
+          required: true
+          in: query
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+        - description: 'The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude. If you specify a location parameter, you must also specify a radius parameter.'
+          name: location
+          required: false
+          in: query
+          type: string
+        - description: The maximum allowed radius is 50 000 meters.
+          name: radius
+          required: false
+          in: query
+          type: string
+        - description: 'Specifies the language in which to return results(Eg:English)'
+          name: language
+          required: false
+          in: query
+          type: string
+        - description: Returns only those places that are open for business at the time the query is sent
+          name: opennow
+          required: false
+          in: query
+          type: string
+        - description: 'Eg:park'
+          name: types
+          required: false
+          in: query
+          type: string
+        - description: Returns the next 20 results from a previously run search
+          name: pagetoken
+          required: false
+          in: query
+          type: string
+        - description: Experimental parameter
+          name: zagatselected
+          required: false
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - textsearch
+  '/radarsearch/{resourcsType}':
+    get:
+      summary: 'A Radar Search request must include at least one of keyword, name, or types.'
+      parameters:
+        - description: json/xml
+          name: resourcsType
+          required: true
+          in: path
+          type: string
+        - description: 'This must be specified as latitude,longitude.'
+          name: location
+          required: true
+          in: query
+          type: string
+        - description: The maximum allowed radius is 50 000 meters
+          name: radius
+          required: true
+          in: query
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+        - description: 'A term to be matched against all content that Google has indexed( Eg :vegetarian)'
+          name: keyword
+          required: false
+          in: query
+          type: string
+        - description: 'One or more terms to be matched against the names of places, separated by a space character'
+          name: name
+          required: false
+          in: query
+          type: string
+        - description: Returns only those places that are open for business at the time the query is sent
+          name: opennow
+          required: false
+          in: query
+          type: string
+        - description: Eg park
+          name: types
+          required: false
+          in: query
+          type: string
+        - description: Experimental parameter
+          name: zagatselected
+          required: false
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - radarsearch
+  '/nearbysearch/{resourceType}':
+    get:
+      parameters:
+        - description: json/xml
+          name: resourceType
+          required: true
+          in: path
+          type: string
+        - description: 'The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude'
+          name: location
+          required: true
+          in: query
+          type: string
+        - description: radius must not be included if rankby=distance is specified.
+          name: radius
+          required: true
+          in: query
+          type: string
+        - description: 'Eg:prominence'
+          name: rankby
+          required: false
+          in: query
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+        - description: 'A term to be matched against all content that Google has indexed( Eg :vegetarian)'
+          name: keyword
+          required: false
+          in: query
+          type: string
+        - description: 'Specifies the language in which to return results(Eg:English)'
+          name: language
+          required: false
+          in: query
+          type: string
+        - description: 'One or more terms to be matched against the names of places, separated by a space character (Eg:cruise)'
+          name: name
+          required: false
+          in: query
+          type: string
+        - description: Returns only those places that are open for business at the time the query is sent
+          name: opennow
+          required: false
+          in: query
+          type: string
+        - description: 'Eg:park'
+          name: types
+          required: false
+          in: query
+          type: string
+        - description: Returns the next 20 results from a previously run search
+          name: pagetoken
+          required: false
+          in: query
+          type: string
+        - description: Experimental parameter
+          name: zagatselected
+          required: false
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - nearbysearch
+  '/details/{resourceType}':
+    get:
+      summary: Include either placeid or reference but not both
+      parameters:
+        - description: json/xml
+          name: resourceType
+          required: true
+          in: path
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+        - description: 'A textual identifier that uniquely identifies a place, returned from a Place Searc'
+          name: placeid
+          required: false
+          in: query
+          type: string
+        - description: 'A textual identifier that uniquely identifies a place, returned from a Place Search'
+          name: reference
+          required: false
+          in: query
+          type: string
+        - description: 'Indicates if the Place Details response should include additional fields. '
+          name: extensions
+          required: false
+          in: query
+          type: string
+        - description: 'Specifies the language in which to return results(Eg:English)'
+          name: language
+          required: false
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - details
+  /photo:
+    get:
+      parameters:
+        - description: ' A string identifier that uniquely identifies a photo. Photo references are returned from either a Place Search or Place Details request'
+          name: photoreference
+          required: true
+          in: query
+          type: string
+        - description: 'Specifies the maximum desired height or width, in pixels, of the image returned by the Place Photos service.'
+          name: maxheight
+          required: true
+          in: query
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - photo
+  '/autocomplete/{resourceType}':
+    get:
+      parameters:
+        - description: json/xml
+          name: resourceType
+          required: true
+          in: path
+          type: string
+        - description: The text string on which to search
+          name: input
+          required: true
+          in: query
+          type: string
+        - description: 'googleapi-key [click here](https://developers.google.com/places/web-service/get-api-key) tp get Google Play API key'
+          name: key
+          required: true
+          in: query
+          type: string
+        - name: offset
+          required: false
+          in: query
+          type: string
+        - description: 'The latitude/longitude around which to retrieve place information. This must be specified as latitude,longitude. If you specify a location parameter, you must also specify a radius parameter.'
+          name: location
+          required: false
+          in: query
+          type: string
+        - name: radius
+          required: false
+          in: query
+          type: string
+        - description: 'Specifies the language in which to return results(Eg:English)'
+          name: language
+          required: false
+          in: query
+          type: string
+        - name: types
+          required: false
+          in: query
+          type: string
+        - description: A grouping of places to which you would like to restrict your results
+          name: components
+          required: false
+          in: query
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      security:
+        - OAuth2: []
+      tags:
+        - autocomplete
+securityDefinitions:
+  OAuth2:
+    type: oauth2
+    flow: application
+    tokenUrl: https://amer-partner52-prod.apigee.net/oauth/client_credential/accesstoken?grant_type=client_credentials
+    scopes: {}
