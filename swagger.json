@@ -1,0 +1,756 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Cars API Demo",
+    "description": "Swagger Demo",
+    "termsOfService": "http://www.apache.org/licenses/LICENSE-2.0.html",
+    "license": {
+      "name": "Apache License",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "v1.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8080/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "category deatils",
+      "description": "category Api"
+    },
+    {
+      "name": "CarDetails",
+      "description": "Details Api"
+    }
+  ],
+  "paths": {
+    "/v1/cars/category": {
+      "get": {
+        "tags": [
+          "category deatils"
+        ],
+        "summary": "category-API",
+        "operationId": "getAllUsingGET",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/requestId"
+          },
+          {
+            "$ref": "#/components/parameters/contentType"
+          },
+          {
+            "$ref": "#/components/parameters/accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/cars/category/{categoryId}": {
+      "get": {
+        "tags": [
+          "category deatils"
+        ],
+        "summary": "cars based on CategoryId",
+        "operationId": "getBooksByCategoryUsingGET",
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "description": "categoryId",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/requestId"
+          },
+          {
+            "$ref": "#/components/parameters/contentType"
+          },
+          {
+            "$ref": "#/components/parameters/accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CategoryIdDetails"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/v1/cars": {
+      "post": {
+        "tags": [
+          "CarDetails"
+        ],
+        "summary": "Update the cars record",
+        "operationId": "updateUsingPOST",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/requestId"
+          },
+          {
+            "$ref": "#/components/parameters/contentType"
+          },
+          {
+            "$ref": "#/components/parameters/accept"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarDetails"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-codegen-request-body-name": "id"
+      },
+      "get": {
+        "tags": [
+          "CarDetails"
+        ],
+        "summary": "List of the  cars record",
+        "operationId": "getDetails",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/requestId"
+          },
+          {
+            "$ref": "#/components/parameters/contentType"
+          },
+          {
+            "$ref": "#/components/parameters/accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cars"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "x-codegen-request-body-name": "id"
+      }
+    },
+    "/v1/cars/{carId}": {
+      "get": {
+        "tags": [
+          "CarDetails"
+        ],
+        "summary": "car details by Id",
+        "operationId": "getBookByIdUsingGET",
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/requestId"
+          },
+          {
+            "$ref": "#/components/parameters/contentType"
+          },
+          {
+            "$ref": "#/components/parameters/accept"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CarDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "headers": {
+              "X-Request-ID": {
+                "schema": {
+                  "$ref": "#/components/schemas/requestID"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/errorResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "requestId": {
+        "in": "header",
+        "name": "X-Request-ID",
+        "description": "ID of the request, unique to the call, as determined by the initiating party",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "contentType": {
+        "in": "header",
+        "name": "Content-type",
+        "description": "content of the current request",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/json"
+          ]
+        }
+      },
+      "accept": {
+        "in": "header",
+        "name": "Accept",
+        "description": "Accept that client is ready to work with this format",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "application/json"
+          ]
+        }
+      }
+    },
+    "schemas": {
+      "Cars": {
+        "title": "CarsByCategory",
+        "type": "object",
+        "required": [
+          "carType",
+          "carId",
+          "company",
+          "model"
+        ],
+        "properties": {
+          "carType": {
+            "type": "string"
+          },
+          "carId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "model": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          }
+        }
+      },
+      "CarDetails": {
+        "title": "CarsDetails",
+        "type": "object",
+        "required": [
+          "carType",
+          "carId",
+          "engineType",
+          "model",
+          "price",
+          "seater",
+          "company"
+        ],
+        "properties": {
+          "carType": {
+            "type": "string"
+          },
+          "carId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "engineType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "model": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "seater": {
+            "type": "string"
+          },
+          "launchDate": {
+            "type": "string"
+          }
+        }
+      },
+      "CategoryIdDetails": {
+        "title": "CarsByCategory",
+        "type": "object",
+        "required": [
+          "carType",
+          "categoryId",
+          "carName",
+          "model"
+        ],
+        "properties": {
+          "CarType": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "carName": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          }
+        }
+      },
+      "Category": {
+        "title": "CategoryList",
+        "type": "object",
+        "required": [
+          "categoryId",
+          "categoryName"
+        ],
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "categoryName": {
+            "type": "string"
+          }
+        }
+      },
+      "requestID": {
+        "type": "string",
+        "format": "UUID"
+      },
+      "errorResponse": {
+        "title": "ErrorDetails",
+        "type": "object",
+        "properties": {
+          "error description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
